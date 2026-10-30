@@ -12,6 +12,7 @@ Run:
 Env:
   RESOLVE_PORT=8765 (default)
   RESOLVE_CACHE_PATH=./yt_resolve_cache.sqlite
+  CORS_ORIGINS=https://your-app.example (comma-separated; default *)
 """
 
 from __future__ import annotations
@@ -35,7 +36,8 @@ except ImportError:
     )
 
 app = Flask(__name__)
-CORS(app)
+_cors_origins = [origin.strip() for origin in os.environ.get("CORS_ORIGINS", "*").split(",") if origin.strip()]
+CORS(app, origins="*" if _cors_origins == ["*"] else _cors_origins)
 
 # The lyrics service is isolated from the existing track resolver.
 try:

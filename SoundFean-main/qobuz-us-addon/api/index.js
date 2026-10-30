@@ -69,10 +69,9 @@ function manifest() {
     name: 'Qobuz US · Personal Account',
     version: '1.0.1-us',
     resources: ['search', 'stream'],
-    // Advertise the download-source capability to Bit-Perfect.
-    // Bit-Perfect uses the existing search + stream protocol to resolve files.
-    // Use only for tracks that the account holder is authorized to save.
-    allowDownloads: 1,
+    // This addon exposes playback only. Do not advertise download capability
+    // accidentally through an environment variable or a deployment setting.
+    allowDownloads: 0,
     settings: [{ key: 'quality', default: 'LOSSLESS', options: [
       { value: 'LOSSLESS' }, { value: 'HI_RES' }, { value: 'HIGH' }, { value: 'LOW' },
     ] }],

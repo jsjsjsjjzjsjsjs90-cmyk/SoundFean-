@@ -16,9 +16,9 @@ function mockRes() {
 }
 
 test('known quality settings', () => {
-  assert.equal(selectedFormat('LOSSLESS').id, 6);
-  assert.equal(selectedFormat('HI_RES').id, 27);
-  assert.equal(selectedFormat('HIGH').id, 5);
+  assert.deepEqual(selectedFormat('LOSSLESS').ids, [27, 7, 6]);
+  assert.deepEqual(selectedFormat('HI_RES').ids, [27, 7, 6]);
+  assert.deepEqual(selectedFormat('HIGH').ids, [5]);
 });
 
 test('signed request deterministic', () => {
